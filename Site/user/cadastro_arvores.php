@@ -1,3 +1,6 @@
+<?php
+include('seguranca.php');
+?>
 <!doctype html>
 <html lang="en">
 
@@ -9,23 +12,21 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href=" css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/formulario-estilo.css">
-    <link rel="stylesheet" type="text/css" href="css/cadestilo.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href=" ../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/formulario-estilo.css">
+    <link rel="stylesheet" type="text/css" href="../css/cadestilo.css">
     <title>Cadastro de Árvores</title>
 
 </head>
 
 <body>
-    <div class="sair">
-        <a class="exit opc" href="index.php"><img src="img/sair.png" height="30px" width="30px"> Sair </a>
-    </div>
+    <?php  include('statusSession.php');   ?>
 
     <div class="menu">
         <div class="top-total">
             <!-- div top-total. DIV para todo o topo do site
-			-->
+            -->
             <div class="title">
                 <h1> Cadastro de Árvores </h1>
             </div>
@@ -34,20 +35,20 @@
                 <!-- Toggler/collapsibe Button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <a class="navbar-brand" href="#">
-                        <img src="img/menu.png" alt="Menu">
+                        <img src="../img/menu.png" alt="Menu">
                         <a class="navbar-brand" href="#"> <b>Menu</b> </a>
                     </a>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center hovermouse " id="collapsibleNavbar">
                     <ul class="nav nav-pills navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link opc" href="perfil.php"> <img src="img/perfil.png" height="30px" width="30px"> Perfil</a>
+                            <a class="nav-link opc" href="perfil.php"> <img src="../img/perfil.png" height="30px" width="30px"> Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link opc" href="gerenciamento_arvores.php"> <img src="img/gerenciamento_informacoes.png" height="30px" width="30px">Gerenciamento de Árvores</a>
+                            <a class="nav-link opc" href="gerenciamento_arvores.php"> <img src="../img/gerenciamento_informacoes.png" height="30px" width="30px">Gerenciamento de Árvores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ap" href="cadastro_arvores.php"> <img src="img/add.png" height="30px" width="30px">Cadastro de Árvores</a>
+                            <a class="nav-link ap" href="cadastro_arvores.php"> <img src="../img/add.png" height="30px" width="30px">Cadastro de Árvores</a>
                         </li>
 
                     </ul>

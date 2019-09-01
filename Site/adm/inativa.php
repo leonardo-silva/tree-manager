@@ -1,35 +1,36 @@
-<!doctype html>
+<?php
+include('seguranca.php');
+?>
+<!Doctype html>
 <html lang="pt-br">
 
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="css/inativaUser.css">
+	<link rel="stylesheet" type="text/css" href="../css/inativaUser.css">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title> Administrador - Inativar Usuário </title>
+	<title> Administrador - Inativar  </title>
 
 </head>
 
 <body>
 	<div class="top-total">
-		<div class="sair">
-			<a class="exit opc" href="index.php"><img src="img/sair.png" height="30px" width="30px"> Sair </a>
-		</div>
+		<?php include('statusSessionAdm.php'); ?>
 		<div class="menu">
 			<div class="top-total">
 				<!-- div top-total. DIV para todo o topo do site
-			-->
+				-->
 
 				<div class="title">
-					<h1> Inativar Usuário </h1>
+					<h1> Gerenciar Administrador </h1>
 				</div>
 				<nav class="navbar navbar-expand-lg ">
 					<!-- Toggler/collapsibe Button -->
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 						<a class="navbar-brand" href="#">
-							<img src="img/menu.png" alt="Menu">
+							<img src="../img/menu.png" alt="Menu">
 							<a class="navbar-brand" href="#"> <b>Menu</b> </a>
 						</a>
 					</button>
@@ -37,36 +38,39 @@
 						<ul class="nav nav-pills navbar-nav">
 							<li class="nav-item">
 
-								<a class="nav-link opc" href="CadastroUso.php"> <img src="img/add_user.png" height="30px" width="30px">Adicionar Usuário</a>
+								<a class="nav-link opc" href="CadastroUso.php"> <img src="../img/add_user.png" height="30px" width="30px">Adicionar Usuário</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link ap" href="inativa.php"> <img src="img/inativa_user.png" height="30px" width="30px">Inativar Usuário</a>
+								<a class="nav-link ap" href="inativa.php"> <img src="../img/inativa_user.png" height="30px" width="30px">Gerenciar Administrador</a>
 							</li>
 						</ul>
 					</div>
-			</div>
+				</div>
 			</nav>
 		</div>
 	</div>
-	<div class="jumbotron conteudo rounded border border-secondary mt-4 col-md-4 col-sm-3">
+	<div class="jumbotron conteudo rounded border border-secondary mt-4 col-md-8 col-sm-10">
 		<form>
+			<p>*Opção para ADM mudar senha e nome</p>
+			<p>*Opção para ADM cadastrar outros ADM?</p>
 			<div class="row">
 				<div class="col-md-6 ">
+
 					<div class="pt-3">
-						<b>Pesquise o Usuário:</b>
+						<b>Pesquise o Administrador:</b>
 					</div>
 				</div>
 				<?php
-					require_once('00 - BD/bd_conexao.php');
-					$sql = "SELECT * FROM USUARIO ORDER BY nome ASC";
-					$resultado = $con->query($sql);
+				require_once('../00 - BD/bd_conexao.php');
+				$sql = "SELECT * FROM administrador ORDER BY nome ASC";
+				$resultado = $con->query($sql);
 				?>
 
 				<div class="col-md-4 ">
 					<select name="busca_usuario" class="form-contro btn-sm btn-secondary" id="busca_usuario" title="Usuários">
 						<option value="0">Selecione</option>
-						<?php while ($infoUsuario = mysqli_fetch_object($resultado)) {  ?>
-						<option value=" <?php echo $infoUsuario->IdUsu; ?>  "><?php echo $infoUsuario->Nome; ?></option>
+						<?php while ($infoAdm = mysqli_fetch_object($resultado)) {  ?>
+							<option value=" <?php echo $infoAdm->IdAdm; ?>  "><?php echo $infoAdm->Nome; ?></option>
 						<?php }
 						fecharConexao($con); ?>
 					</select>
@@ -77,7 +81,7 @@
 					<button type="button" class="btn btn-success btn-block spc" name="inativar">Inativar Usuário</button>
 				</div>
 			</div>
-	</div>
+		</div>
 	</form>
 	<div class=" tst text-center">
 		<h2> Rodapé da pagina </h2>
