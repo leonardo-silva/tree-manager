@@ -40,99 +40,99 @@ include('seguranca.php');
                                 <a class="nav-link ap" href="CadastroUso.php"> <img src="../img/add_user.png" height="30px" width="30px">Cadastrar Usuário</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link opc" href="inativa.php"> <img src="../img/inativa_user.png" height="30px" width="30px">Gerenciar  dministrador</a>
+                                <a class="nav-link opc" href="inativa.php"> <img src="../img/inativa_user.png" height="30px" width="30px">Gerenciar Administrador</a>
                             </li>
                         </ul>
                     </div>
-                </div>
             </div>
         </div>
-        <div class=" rounded border border-secondary mt-3 col-sm-4 cont-form text-center conteudo">
-            <!-- ============================VERIFICAR A OPÇÃO PARA EDITAR O USUÁRIO   ==============================================================-->
-            <?php
-            if ((isset($_GET['alterar']))) {
+    </div>
+    <div class=" rounded border border-secondary mt-3 col-sm-4 cont-form text-center conteudo">
+        <!-- ============================VERIFICAR A OPÇÃO PARA EDITAR O USUÁRIO   ==============================================================-->
+        <?php
+        if ((isset($_GET['alterar']))) {
 
-                require_once('../00 - BD/bd_conexao.php');
-                $id = $_GET['id'];
-                $sql = "SELECT * FROM  usuario WHERE IdUsu=$id";
-                $resultado = $con->query($sql);
-                $infoUsuario = mysqli_fetch_object($resultado);
+            require_once('../00 - BD/bd_conexao.php');
+            $id = $_GET['id'];
+            $sql = "SELECT * FROM  usuario WHERE IdUsu=$id";
+            $resultado = $con->query($sql);
+            $infoUsuario = mysqli_fetch_object($resultado);
 
-                ?>
-                <!-- colocar form de alterar -->
-
-
-
-                <h2>Alterar usuário</h2>
-                <form method="POST" action="alterar_usuario.php?id=<?php echo $infoUsuario->IdUsu; ?>">
-                    <div>
-                        <p>
-                            <label for="IdUsu"></label>
-                            <input id="IdUsu" name="IdUsu" required="required" type="text" placeholder="IdUsu" value="<?php echo $infoUsuario->IdUsu; ?>" />
-                        </p>
-                        <p>
-                            <label for="nome_cad"></label>
-                            <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome " value="<?php echo $infoUsuario->Nome; ?>" />
-                        </p>
-
-                        <p>
-                            <label for="Telefone_cad"></label>
-                            <input id="Telefone_cad" name="telefone_cad" required="required" type="text" placeholder="Telefone" value="<?php echo $infoUsuario->Telefone; ?>" />
-                        </p>
-
-                        <p>
-                            <label for="senha_cad"></label>
-                            <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="Senha" value="<?php echo $infoUsuario->Senha; ?>" />
-                        </p>
-                        <p>
-                            <label for="email"></label>
-                            <input id="email" name="email" required="required" type="email" placeholder="email" value="<?php echo $infoUsuario->Email; ?>" />
-                        </p>
-
-                    </div>
-
-                    <div class="text-center">
-                        <input class="btn btn-success" type="submit" value="Alterar" name="butao" />
-                    </div>
-                </form>
+            ?>
+            <!-- colocar form de alterar -->
 
 
 
+            <h2>Alterar usuário</h2>
+            <form method="POST" action="alterar_usuario.php?id=<?php echo $infoUsuario->IdUsu; ?>">
+                <div>
+                    <p>
+                        <label for="IdUsu"></label>
+                        <input id="IdUsu" name="IdUsu" required="required" type="text" placeholder="IdUsu" value="<?php echo $infoUsuario->IdUsu; ?>" />
+                    </p>
+                    <p>
+                        <label for="nome_cad"></label>
+                        <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome " value="<?php echo $infoUsuario->Nome; ?>" />
+                    </p>
 
-                <?php
-            }/*Fechar chave do IF  */ else {
-                ?>
+                    <p>
+                        <label for="Telefone_cad"></label>
+                        <input id="Telefone_cad" name="telefone_cad" required="required" type="text" placeholder="Telefone" value="<?php echo $infoUsuario->Telefone; ?>" />
+                    </p>
 
-                <form method="POST" action="validaCadastroUsu.php">
-                    <div>
+                    <p>
+                        <label for="senha_cad"></label>
+                        <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="Senha" value="<?php echo $infoUsuario->Senha; ?>" />
+                    </p>
+                    <p>
+                        <label for="email"></label>
+                        <input id="email" name="email" required="required" type="email" placeholder="email" value="<?php echo $infoUsuario->Email; ?>" />
+                    </p>
 
-                        <p>
-                            <label for="nome_cad"></label>
-                            <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome " />
-                        </p>
+                </div>
 
-                        <p>
-                            <label for="Telefone_cad"></label>
-                            <input id="Telefone_cad" name="telefone_cad" required="required" type="text" placeholder="Telefone" />
-                        </p>
+                <div class="text-center">
+                    <input class="btn btn-success" type="submit" value="Alterar" name="butao" />
+                </div>
+            </form>
 
-                        <p>
-                            <label for="senha_cad"></label>
-                            <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="Senha" />
-                        </p>
-                        <p>
-                            <label for="email"></label>
-                            <input id="email" name="email" required="required" type="email" placeholder="email" />
-                        </p>
 
-                    </div>
 
-                    <div class="text-center">
-                        <input class="btn btn-success" type="submit" value="Cadastrar" name="butaoCadastro" />
-                    </div>
-                </form>
 
-            <?php //fechar chave do else
+        <?php
+        }/*Fechar chave do IF  */ else {
+            ?>
+
+            <form method="POST" action="validaCadastroUsu.php">
+                <div>
+
+                    <p>
+                        <label for="nome_cad"></label>
+                        <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome " />
+                    </p>
+
+                    <p>
+                        <label for="Telefone_cad"></label>
+                        <input id="Telefone_cad" name="telefone_cad" required="required" type="text" placeholder="Telefone" />
+                    </p>
+
+                    <p>
+                        <label for="senha_cad"></label>
+                        <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="Senha" />
+                    </p>
+                    <p>
+                        <label for="email"></label>
+                        <input id="email" name="email" required="required" type="email" placeholder="email" />
+                    </p>
+
+                </div>
+
+                <div class="text-center">
+                    <input class="btn btn-success" type="submit" value="Cadastrar" name="butaoCadastro" />
+                </div>
+            </form>
+
+        <?php //fechar chave do else
         }
         ?>
 
@@ -155,7 +155,7 @@ include('seguranca.php');
             </button>
         </div>
 
-        <?php
+    <?php
     }
     if (isset($_GET['error_login'])) { ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -164,7 +164,7 @@ include('seguranca.php');
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <?php
+    <?php
     }
     ?>
 
@@ -179,7 +179,7 @@ include('seguranca.php');
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <?php
+    <?php
     } elseif (isset($_GET['alterado'])) {
         ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -188,7 +188,7 @@ include('seguranca.php');
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <?php
+    <?php
     }
     ?>
 
@@ -211,7 +211,7 @@ include('seguranca.php');
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <?php
+    <?php
     } elseif (isset($_GET['result']) && $_GET['result'] == "excluido") {
         ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -220,7 +220,7 @@ include('seguranca.php');
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <?php
+    <?php
     }
     ?>
 
@@ -228,58 +228,60 @@ include('seguranca.php');
     <div class=" container  table-responsive">
         <?php
         require_once('../00 - BD/bd_conexao.php');
-            $sql = " SELECT * FROM usuario ORDER BY nome ASC"; // SELECIONA OS USUARIOS POR ORDEM ALFABÉTICA CRESCENTE
-            $resultado = $con->query($sql);
-            ?>
-            <!--  Criar tabela para mostrar todos os usuários -->
-            <table class="table table-striped table-responsive-md ">
-                <thead>
-                    <tr class="bg-success">
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col">Ação</th>
+        $sql = " SELECT * FROM usuario ORDER BY nome ASC"; // SELECIONA OS USUARIOS POR ORDEM ALFABÉTICA CRESCENTE
+        $resultado = $con->query($sql);
+        ?>
+        <!--  Criar tabela para mostrar todos os usuários -->
+        <table class="table table-striped table-responsive-md ">
+            <thead>
+                <tr class="bg-success">
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php while ($infoUsuario = mysqli_fetch_object($resultado)) { ?>
+                    <tr>
+                        <th scope="row"> <?php echo $infoUsuario->IdUsu ?> </th>
+                        <td><?php echo $infoUsuario->Nome; ?></td>
+                        <td><?php echo $infoUsuario->Email; ?></td>
+                        <td><?php echo $infoUsuario->Telefone; ?></td>
+                        <td>
+                            <a href="CadastroUso.php?alterar&id=<?php echo $infoUsuario->IdUsu; ?>">
+                                <i class="far fa-edit text-warning fa-lg"></i>
+                            </a>
+                            <a href="excluir_usuario.php?id=<?php echo $infoUsuario->IdUsu; ?>">
+                                <i class="fas fa-trash-alt text-danger fa-lg"></i>
+                            </a>
+                        </td>
                     </tr>
-                </thead>
-
-                <tbody>
-                    <?php while ($infoUsuario = mysqli_fetch_object($resultado)) { ?>
-                        <tr>
-                            <th scope="row"> <?php echo $infoUsuario->IdUsu ?> </th>
-                            <td><?php echo $infoUsuario->Nome; ?></td>
-                            <td><?php echo $infoUsuario->Email; ?></td>
-                            <td><?php echo $infoUsuario->Telefone; ?></td>
-                            <td>
-                                <a href="CadastroUso.php?alterar&id=<?php echo $infoUsuario->IdUsu; ?>">
-                                    <i class="far fa-edit text-warning fa-lg"></i>
-                                </a>
-                                <a href="excluir_usuario.php?id=<?php echo $infoUsuario->IdUsu; ?>">
-                                    <i class="fas fa-trash-alt text-danger fa-lg"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <?php  
+                <?php
                 }
-                fecharConexao($con); 
+                fecharConexao($con);
+
                 ?>
-
-            </table>
-        </div>
+            </tbody>
 
 
-        <div class="rodape text-center">
-            <h2> Rodapé da página </h2>
-        </div>
+        </table>
+    </div>
+
+
+    <div class="rodape text-center">
+        <h2> Rodapé da página </h2>
+    </div>
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 
-    </html>
+</html>

@@ -2,7 +2,7 @@
 include('seguranca.php');
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
@@ -21,52 +21,57 @@ include('seguranca.php');
 </head>
 
 <body>
-    <?php  include('statusSession.php');   ?>
+    <?php include('statusSession.php');   ?>
 
-    <div class="menu">
-        <div class="top-total">
-            <!-- div top-total. DIV para todo o topo do site
+
+    <div class="top-total">
+        <!-- div top-total. DIV para todo o topo do site
             -->
-            <div class="title">
-                <h1> Cadastro de Árvores </h1>
-            </div>
-
-            <nav class="navbar navbar-expand-lg ">
-                <!-- Toggler/collapsibe Button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                    <a class="navbar-brand" href="#">
-                        <img src="../img/menu.png" alt="Menu">
-                        <a class="navbar-brand" href="#"> <b>Menu</b> </a>
-                    </a>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center hovermouse " id="collapsibleNavbar">
-                    <ul class="nav nav-pills navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="perfil.php"> <img src="../img/perfil.png" height="30px" width="30px"> Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="gerenciamento_arvores.php"> <img src="../img/gerenciamento_informacoes.png" height="30px" width="30px">Gerenciamento de Árvores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link ap" href="cadastro_arvores.php"> <img src="../img/add.png" height="30px" width="30px">Cadastro de Árvores</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
+        <div class="menu">
+            <h1> Cadastro de Árvores </h1>
         </div>
 
+        <?php include('navbar.php'); ?>
     </div>
+
+
+
     <!-- ============================================================ Formulário===================== -->
     <div class="container borda-baixo">
 
 
         <div class="box-body">
-            <form>
+            <form action="validaCadastroArvore.php" method="GET">
                 <div class="tituloForm">
                     <h1 class="text-center">Formulário para cadastro das árvores</h1>
                     <hr>
                 </div>
+                <!-- verificação para ver se o cadastro doi realizado com sucesso ou não: exibir a mensagem            -->
+                <?php
+                if (isset($_GET['success'])) { ?>
+
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        A árvore foi inserida com sucesso!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                <?php  }
+                if (isset($_GET['error'])) { ?>
+
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Algo de errado ocorreu :( Por favor, tente novamente!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+
+                <?php  } ?>
                 <div class="fundo">
                     <div>
                         <a class="btn btn-success col-12" data-toggle="collapse" href="#Mapeamento-e-localização" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">I- Mapeamento e localização</a>
@@ -77,11 +82,11 @@ include('seguranca.php');
 
                                 <div class="form-group col-md-4 ">
                                     <label for="text">Cordendas Geográficas:</label>
-                                    <input class="form-control" type="text" name="fone">
+                                    <input class="form-control" type="text" name="cordGeo">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="text">Rua:</label>
-                                    <input class="form-control" type="phone" name="fone" placeholder="Ex: Rua Santa Isabel">
+                                    <input class="form-control" type="phone" name="rua" placeholder="Ex: Rua Santa Isabel">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="numImovel"> Nº do imóvel mais próximo </label>
@@ -95,24 +100,24 @@ include('seguranca.php');
                                 </legend>
                                 <div class="form-group col-md-2">
                                     <label for="Postes">Postes(m):</label>
-                                    <input type="text" name="float" class="form-control" placeholder="Ex: 2.5" aria-describedby="helpId">
+                                    <input type="text" name="distanciaPoste" class="form-control" placeholder="Ex: 2.5" aria-describedby="helpId">
 
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="Esquinas:">Esquinas(m):</label>
-                                    <input type="text" class="form-control" placeholder="Ex: 4.9">
+                                    <input type="text" name="esquina" class="form-control" placeholder="Ex: 4.9">
                                 </div>
                                 <div class=" form-group col-md-3 ">
                                     <label for="entreOutrasArv "> Entre outra árvore(m):</label>
-                                    <input type="text " class="form-control " placeholder="Ex: 5.6 ">
+                                    <input type="text " name="distanciaEntreArvore" class="form-control " placeholder="Ex: 5.6 ">
                                 </div>
                                 <div class=" form-group col-md-3 ">
                                     <label for="garagens "> Entrada de garagens(m):</label>
-                                    <input type="text " class="form-control " placeholder="Ex: 5.6 ">
+                                    <input type="text " name="distaEntradaGaragem" class="form-control " placeholder="Ex: 5.6 ">
                                 </div>
                                 <div class=" form-group col-md-2 ">
                                     <label for="loteVago"> Lotes vagos(m):</label>
-                                    <input type="text " class="form-control " placeholder="Ex: 5.6 ">
+                                    <input type="text " name="distanciaLotesVagos" class="form-control " placeholder="Ex: 5.6 ">
                                 </div>
                             </div>
                         </div>
@@ -128,29 +133,29 @@ include('seguranca.php');
                                 <legend> 1. Identificação</legend>
                                 <div class="form-group col-md-3">
                                     <label for="familia">Família:</label>
-                                    <input type="text" class="form-control" placeholder="Rutaceae" style="font-style:italic">
+                                    <input type="text" class="form-control" name="familia" placeholder="Rutaceae" style="font-style:italic">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="nomeCinetifico">Nome científico:</label>
-                                    <input type="text" class="form-control" placeholder="Murraya paniculata" style="font-style:italic">
+                                    <input type="text" name="nomeCientifico" class="form-control" placeholder="Murraya paniculata" style="font-style:italic">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="nomePopular">Nome popular:</label>
-                                    <input type="text" class="form-control" placeholder="Murta-de-cheiro" style="font-style:italic">
+                                    <input type="text" name="nomePopular" class="form-control" placeholder="Murta-de-cheiro" style="font-style:italic">
                                 </div>
                             </div>
                             <div class="radios form-row ">
                                 <div class=" form-radio col-md-3">
-                                    <label for="Origem">Origem:</label>
-                                    <label for="nativa">Nativa:</label> <input class="form-radio-inline" type="radio" name="Origem" value="Nativa" checked>
-                                    <label for="exotica">Exótica:</label> <input class="form-radio-inline" type="radio" name="Origem" value="Exótica">
+                                    <label>Origem:</label>
+                                    <label for="nativa">Nativa:</label> <input class="form-radio-inline" type="radio" name="Origem" value="nativa" checked>
+                                    <label for="exotica">Exótica:</label> <input class="form-radio-inline" type="radio" name="Origem" value="exotica">
 
                                 </div><br>
 
                                 <div class=" form-radio col-md-3">
-                                    <label for="habito">Hábito:</label>
-                                    <label for="habitArvore">Árvore:</label> <input class="form-radio-inline" type="radio" name="habito" value="Árvore" checked>
-                                    <label for="exotica">Arbusto:</label> <input class="form-radio-inline" type="radio" name="habito" value="Arbusto">
+                                    <label>Hábito:</label>
+                                    <label for="habitArvore">Árvore:</label> <input class="form-radio-inline" type="radio" name="habito" value="arvore" checked>
+                                    <label for="exotica">Arbusto:</label> <input class="form-radio-inline" type="radio" name="habito" value="arbusto">
 
                                 </div>
                                 <div class=" form-radio col-md-3">
@@ -164,12 +169,12 @@ include('seguranca.php');
                                 <legend>2. Porte da árvore</legend>
                                 <div class="form-group col-md-3">
                                     <label for="alturaArvor"> Altura da árvore(m):</label>
-                                    <input type="text" class="form-control" placeholder="2.10">
+                                    <input type="text" name="alturaArvore" class="form-control" placeholder="2.10">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="bifurcacao">Altura da 1º bifurcação(m):</label>
-                                    <input type="text" class="form-control" placeholder="1.15">
+                                    <input type="text" name="alturaPrimeiraBifurc" class="form-control" placeholder="1.15">
                                 </div>
 
                             </div>
@@ -218,27 +223,27 @@ include('seguranca.php');
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="largura"> Largura da calçada:</label>
-                                    <input type="text" class="form-control">
+                                    <input type="number" name="larguraCalcada" class="form-control">
                                 </div>
 
                             </div>
                             <div class="form-group form-row">
                                 <div class="form-group  col-md-4 col-sm-3  borda-direita"> Conflitos: <br>
-                                    <div class="custom-control custom-radio"><input type="radio" name="Conflitos" value="redeDeEnergia"> Rede de energia</div>
+                                    <div class="custom-control custom-radio"><input type="radio" name="Conflitos" value="redeDeEnergia" checked> Rede de energia</div>
                                     <div class="custom-control custom-radio"><input type="radio" name="Conflitos" value="Construçoes"> Construções</div>
                                     <div class="custom-control custom-radio"> <input type="radio" name="Conflitos" value="outraArvore"> Outra árvore</div>
                                     <div class="custom-control custom-radio"><input type="radio" name="Conflitos" value="Sinalizacao"> Sinalização</div>
                                     <div class="custom-control custom-radio"><input type="radio" name="Conflitos" value="Outro"> Outro<br><br></div>
                                 </div>
                                 <div class=" form-group col-md-4 col-sm-3 borda-direita "> Poda: <br>
-                                    <div class="custom-control custom-radio"><input type="radio" name="Poda" value="podaLeve"> Poda leve</div>
+                                    <div class="custom-control custom-radio"><input type="radio" name="Poda" value="podaLeve" checked> Poda leve</div>
                                     <div class="custom-control custom-radio"> <input type="radio" name="Poda" value="Construçoes"> Poda pesada</div>
                                     <div class="custom-control custom-radio"><input type="radio" name="Poda" value="outraArvore"> Sem poda</div>
 
                                 </div>
                                 <div class=" form-group col-md-4 col-sm-3 borda-direita "> Pavimentação da calçada <br>
-                                    <div class="custom-control custom-radio"><input type="radio" name="Pavimentação" value="comPavimento"> Com pavimento</div>
-                                    <div class="custom-control custom-radio"><input type="radio" name="Pavimentação" value="Construçoes"> Sem pavimento</div>
+                                    <div class="custom-control custom-radio"><input type="radio" name="Pavimentacao" value="comPavimento" checked> Com pavimento</div>
+                                    <div class="custom-control custom-radio"><input type="radio" name="Pavimentacao" value="Construçoes"> Sem pavimento</div>
 
                                 </div>
                             </div>
@@ -257,7 +262,7 @@ include('seguranca.php');
                     </div>
                 </div>
                 <div>
-                    <input class="btn btn-primary col-2 col-xs-3" type="submit" value="Enviar">
+                    <input class="btn btn-primary col-2 col-xs-3" type="submit" name="butao" value="Enviar">
                     <input class="btn btn-danger col-2 col-xs-3" type="reset" value="Limpar">
                 </div>
 

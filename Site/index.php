@@ -24,40 +24,41 @@
             <div class="jumbotron  ">
                 <!-- div top. DIV para colocar a img do projeto. 
 				-->
-                <div class="title text-center">
+                <div class="text-center">
                     <!-- dentro daqui colocarei a imagem do project.
 					<img> 
 				-->
                     <h1> Controle da Arborização Urbana em Salinas </h1>
                 </div>
-                <nav class="navbar navbar-expand-lg ">
-                    <!-- Brand -->
-                    <!-- Toggler/collapsibe Button -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                        <a class="navbar-brand" href="#">
-                            <img src="img/menu.png" alt="Menu">
-                            <a class="navbar-brand" href="#"> <b>Menu</b> </a>
-                        </a>
+
+                <nav class="navbar navbar-expand-lg navbar-dark " style="background:#333333;">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span> <img src="img/menu.png" alt="home" height="30px" width="30px"></span>
+                        <span class="navbar-brand" href="#"> Menu</span>
                     </button>
-                    <!-- Navbar links -->
-                    <div class="collapse navbar-collapse justify-content-center hovermouse " id="collapsibleNavbar">
-                        <ul class="navbar-nav menu ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php"> <img src="img/home1.png" height="30px" width="30px"> Home</a>
+
+
+                    <div class="collapse navbar-collapse  " id="navbarTogglerDemo03">
+
+                        <ul class="navbar-nav mx-auto mt-2 mt-lg-0 ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.php"><img src="img/home1.png" alt="home" height="30px" width="30px"> Home </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#conheca_projeto"> <img src="img/conheca_projeto.png" height="30px" width="30px"> Conheça sobre Projeto</a>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#conheca_projeto"><img src="img/conheca_projeto.png" alt="erroImg" height="30px" width="30px"> Conheça sobre o projeto</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#veja_arvores_cadastradas"> <img src="img/cadastro.png" height="30px" width="30px"> Veja as árvores já cadastradas</a>
+                            <li class="nav-item active">
+                                <a class="nav-link " href="#veja_arvores_cadastradas"> <img src="img/cadastro.png" alt="cadastro" height="30px" width="30px"> Veja as árvores já cadastradas</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#Contato"> <img src="img/fone.png" height="40px" width="40px"> Contato
-                                </a>
+                            <li class="nav-item active">
+                                <a class="nav-link " href="#Contato"> <img src="img/fone.png" alt="cont" height="30px" width="30px"> Contato</a>
                             </li>
+
                         </ul>
+
                     </div>
                 </nav>
+
                 <!--FIM DO CABEÇALHO-->
             </div>
         </div>

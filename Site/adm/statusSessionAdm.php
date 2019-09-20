@@ -16,7 +16,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						Ao clilcar em sair, a sessaõ será encerrada. 
+						Ao clilcar em sair, a sessão será encerrada. 
 					</div>
 					<div class="modal-footer">
 						<a class="btn btn-danger" href="logoutAdm.php">Sair</a>

@@ -3,14 +3,14 @@ include('seguranca.php');
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="../css/gerencia_arvores_estilo.css">
+    <link rel="stylesheet" type="text/css" href="../css/gerencia_arvores_estilo2.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -19,62 +19,140 @@ include('seguranca.php');
 </head>
 
 <body>
-   <?php  include('statusSession.php');   ?>
+    <?php include('statusSession.php');   ?>
 
-    <div class="menu">
-        <div class="top-total">
-            <!-- div top-total. DIV para todo o topo do site
+
+    <div class="top-total">
+        <!-- div top-total. DIV para todo o topo do site
 			-->
-            <div class="title">
-                <h1> Gerenciamento de Árvores </h1>
-            </div>
-
-            <nav class="navbar navbar-expand-lg ">
-                <!-- Toggler/collapsibe Button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                    <a class="navbar-brand" href="#">
-                        <img src="../img/menu.png" alt="Menu">
-                        <a class="navbar-brand" href="#"> <b>Menu</b> </a>
-                    </a>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center hovermouse " id="collapsibleNavbar">
-                    <ul class="nav nav-pills navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="perfil.php"> <img src="../img/perfil.png" height="30px" width="30px"> Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link ap" href="gerenciamento_arvores.php"> <img src="../img/gerenciamento_informacoes.png" height="30px" width="30px">Gerenciamento de Árvores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link opc" href="cadastro_arvores.php"> <img src="../img/add.png" height="30px" width="30px">Cadastro de Árvores</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
+        <div class="navegacao">
+            <h1> Gerenciamento de Árvores </h1>
         </div>
-
+        <?php include('navbar.php'); ?>
     </div>
 
-    <form method="get">
-        <div class="form">
-            <div class="title2">
-                <p><br>Pesquisar Árvore
-                    <p>
-            </div>
 
-            <div class="campos">
-                <br>&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID da Árvore: <input class="input" type="text" name="idArv"><br>
-                <br>&emsp;&emsp;Espécie da Árvore: <input class="input" type="text" name="espArv"><br>
-                <br>&nbsp;Ponto de Referência: <input class="input" type="text" name="pontoRef">
-            </div>
+    <!-- ====================== PESQUISAR ARVORE POR FORMULARIO ==================================================================  -->
+    <div class="container row mx-auto ">
+        <div class="pesquisa-form form-group bloco-form col-md-4 mt-2  border-right ">
+            <form action="gerenciamento_arvores.php" method="POST">
+                <div class="form-group  col-md-11 col-sm-9  ">
+                    <label for="ID"><b> ID:</b></label>
+                    <input class="form-control" type="number" name="ID" disabled>
+                </div>
+                <div class="form-group col-md-11 col-sm-9">
+                    <label for="Especie"><b>Nome científico:</b></label>
+                    <input class="form-control" type="text" name="Especie">
+                </div>
+                <div class="form-group col-md-11 col-sm-9 ">
+                    <label for="rua"><b>Rua:</b></label>
+                    <input type="text" class="form-control" name="rua">
 
-            <br><br><button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-xl">Pesquisar</button> &nbsp;
-            <button type="reset" class="btn btn-dark">Limpar</button>
-            <br><br><br>
+                </div>
+                <div class="ml-3">
+                    <input type="submit" name="pesquisa" class="btn btn-info" value="Pesquisar">
+                    <input type="reset" class="btn btn-dark" value="Limpar">
+
+                </div>
+            </form>
         </div>
-    </form>
+        <!--====================================== Fim de pesquisa =========================================================================================-->
+        <!--Mostrar resultado da pesquisa na tabela -->
+        <?php
+        if (isset($_POST['pesquisa'])) {
 
+
+            require_once('../00 - BD/bd_conexao.php');
+            //$id = $_POST['ID'];
+            $rua = $_POST['rua'];
+            $especie = $_POST['Especie'];
+
+            if ((!empty($especie) && empty($rua))) { // CASO APENAS A ESPECIE SEJA INFORMADA
+
+                $sql = " SELECT IdArvore, NomeCientifico, Rua, CordGeo FROM arvore where  NomeCientifico = '$especie'";
+            } else if (!empty($rua) && empty($especie)) { // CASO APENAS A RUA SEJA INFORMADA
+
+                $sql = " SELECT IdArvore, NomeCientifico, Rua, CordGeo FROM arvore where  Rua = '$rua'";
+            }
+            if (!empty($especie) && !empty($rua) || empty($especie) && empty($rua)) { // CASO NENHUM DOS CAMPOS TENHA SIDO INFORMADOS OU OS DOIS CAMPOS FORAM INFORMADOS
+
+                $sql = " SELECT IdArvore, NomeCientifico, Rua, CordGeo FROM arvore where  Rua = '$rua' AND NomeCientifico= '$especie'";
+            }
+
+
+            /* NAO ESTÁ DANDO CERTO!! 
+            if(($con->query($sql))=== TRUE){
+                echo "SUCESSO";
+                fecharConexao($con);
+                
+            }elseif($con->query($sql)===False){
+                echo "erro";
+                fecharConexao($con);
+            }
+            */
+            //maneira alternativa
+            $resultado = $con->query($sql) or die("Erro ao se conectar com o Banco.");
+
+
+            /*  if (empty($informacaoArvore)) {
+                echo "Objeto não encontrado";
+            } else {
+                echo $informacaoArvore->CordGeo;
+                echo $informacaoArvore->NomeCientifico;
+            
+            }
+           */
+
+            ?>
+            <div class="col-md-8 mt-3 table table-responsive">
+                <table class="table table-striped  ">
+                    <thead>
+                        <tr class="bg-success">
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome científico</th>
+                            <th scope="col">Rua</th>
+                            <th scope="col">Coordenada</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+
+                            while ($informacaoArvore = mysqli_fetch_object($resultado)) { ?>
+                            <tr>
+                                <th scope="row"><?php echo $informacaoArvore->IdArvore; ?></th>
+                                <td> <?php echo $informacaoArvore->NomeCientifico; ?></td>
+                                <td><?php echo $informacaoArvore->Rua; ?></td>
+                                <td><?php echo $informacaoArvore->CordGeo; ?></td>
+                                <td>
+                                    <a href="formulario.php?id=<?php echo $informacaoArvore->IdArvore; ?>"> Editar </a>
+                                    <a href="excluirArvore.php?id=<?php echo $informacaoArvore->IdArvore; ?>"> Excluir </a>
+                                    <a href="formulario.php?id=<?php echo $informacaoArvore->IdArvore; ?>"> Ver </a>
+                                </td>
+                            </tr>
+
+                        <?php
+                            } //while
+                            ?>
+
+                    </tbody>
+
+                </table>
+                <?php // VERIFICAR SE A PESQUISA GEROU ALGUM RESULTADO
+                    if (mysqli_num_rows($resultado) == 0) {
+                        echo "<h5>Sua pesquisa não gerou nenhum resultado.A árvore nao foi encontrada.</h5>";
+                    }
+                    ?>
+            </div>
+
+            <?php
+                fecharConexao($con); //else   
+                ?>
+        <?php } //if pesquisa 
+        ?>
+
+    </div>
 
     <!-- ==========================================Modal============================================= -->
 
@@ -98,21 +176,21 @@ include('seguranca.php');
                                 <td>Mark</td>
                                 <td>Policlínica Salinense</td>
                                 <td>@mdo</td>
-                                <td> <a href="formulario.php"> Editar </a>  <a href="#"> Excluir </a>  <a href="formulario.php"> Ver </a> </td>
+                                <td> <a href="formulario.php"> Editar </a> <a href="#"> Excluir </a> <a href="formulario.php"> Ver </a> </td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
                                 <td>Jacob</td>
                                 <td>Fofocas</td>
                                 <td>@fat</td>
-                                <td> <a href="formulario.php"> Editar </a>  <a href="#"> Excluir </a>  <a href="formulario.php"> Ver </a> </td>
+                                <td> <a href="formulario.php"> Editar </a> <a href="#"> Excluir </a> <a href="formulario.php"> Ver </a> </td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
                                 <td>Larry</td>
                                 <td>Paladar</td>
                                 <td>@twitter</td>
-                                <td> <a href="formulario.php"> Editar </a>  <a href="#"> Excluir </a>  <a href="formulario.php"> Ver </a> </td>
+                                <td> <a href="formulario.php"> Editar </a> <a href="#"> Excluir </a> <a href="formulario.php"> Ver </a> </td>
                             </tr>
 
                         </tbody>
@@ -126,11 +204,11 @@ include('seguranca.php');
         </div>
     </div>
 
-
+    <!--
     <div class="rodape text-center">
         <h2> Rodapé da Página </h2>
     </div>
-
+                -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

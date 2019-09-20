@@ -18,6 +18,3 @@ include('seguranca.php');
  }
 
 fecharConexao($con);
-
-
-?>

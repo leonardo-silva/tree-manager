@@ -35,12 +35,10 @@ $infoUsuario = mysqli_fetch_object($resultado);
 if (empty($infoUsuario)) {
 	header("Location: loginUsuario.php?error_login");
 } else {
-  // Adicionando uma informação à sessão
+	// Adicionando uma informação à sessão
 
 	$_SESSION['validarSessao'] = $infoUsuario->Nome;
-	$_SESSION['IdUsu'] = $infoUsuario->IdUsu;	
+	$_SESSION['IdUsu'] = $infoUsuario->IdUsu;
 
 	header("Location: perfil.php");
 }
-
-?>

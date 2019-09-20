@@ -15,7 +15,7 @@
 
 		<a class="links" id="paralogin"></a>
 
-		<div class="content mt-5 col-sm-12 col-md-12 col-lg-8 col-xl-8 ">
+		<div class="content mt-3 col-sm-12 col-md-12 col-lg-8 col-xl-8 ">
 			<!--FORMULÁRIO DE LOGIN-->
 			<div id="login">
 
@@ -26,12 +26,12 @@
 					<?php
 					if (isset($_GET['error_login'])) { ?>
 						<div class="alert alert-danger alert-dismissible fade show" role="alert">
-							Usuário inválido! Por favor, verifique o email e a senha. 
+							Usuário inválido! Por favor, verifique o email e a senha.
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<?php
+					<?php
 					}
 					?>
 					<h1> <img src="../img/arvoreLogin.png" alt="" height="18%" width="18%">Login</h1>
